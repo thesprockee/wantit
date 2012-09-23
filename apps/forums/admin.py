@@ -39,7 +39,6 @@ class TopicTrackerAdmin(BaseAdmin):
     list_display = ('topic', 'user', 'last_read', 'subscribed')
     list_filter = ('user',)
     search_fields = ('topic__title', 'message__body')
-    date_hierarchy = 'last_read'
 
 
 admin.site.register(TopicTracker, TopicTrackerAdmin)
