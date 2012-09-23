@@ -41,7 +41,8 @@ class Message(models.Model):
             return None
 
     def edit(self, user, new_body):
-        diff = unified_diff(self.body.split('\n'), new_body.split('\n'))
+        diff_obj = unified_diff(self.body.split('\n'), new_body.split('\n'))
+        diff = '\n'.join([l for l in diff_obj])
         with transaction.commit_on_success():
             history = MessageHistory(message=self, editor=user, diff=diff)
             history.save()
@@ -56,7 +57,8 @@ class MessageHistory(models.Model):
     timestamp = models.DateTimeField(default=timezone.now, editable=False)
 
     def __unicode__(self):
-        return unicode("[%s] %s: %s" % (timestamp, editor, message))
+        return unicode("[%s] %s: %s" % (self.timestamp, self.editor,
+                self.message))
 
 
 class TopicTracker(models.Model):
@@ -66,4 +68,4 @@ class TopicTracker(models.Model):
     subscribed = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return unicode("%s: %s" % (user, topic))
+        return unicode("%s: %s" % (self.user, self.topic))
