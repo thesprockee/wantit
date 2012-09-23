@@ -42,7 +42,7 @@ class Message(models.Model):
 
     def edit(self, user, new_body):
         diff_obj = unified_diff(self.body.split('\n'), new_body.split('\n'),
-                fromfile='old_body', tofile='new_body')
+                fromfile='old_body', tofile='new_body', lineterm='')
         diff = '\n'.join([l for l in diff_obj])
         with transaction.commit_on_success():
             history = MessageHistory(message=self, editor=user, diff=diff)
