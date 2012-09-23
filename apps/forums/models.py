@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db import transaction
 from autoslug import AutoSlugField
+from difflib import unified_diff
 
 # Create your models here.
 class Topic(models.Model):
@@ -39,10 +40,19 @@ class Message(models.Model):
         except MessageHistory.DoesNotExist:
             return None
 
+    def edit(self, user, new_body):
+        diff = unified_diff(self.body.split('\n'), new_body.split('\n'))
+        with transaction.commit_on_success():
+            history = MessageHistory(message=self, editor=user, diff=diff)
+            history.save()
+            self.body = new_body
+            self.save()
+
 
 class MessageHistory(models.Model):
     message = models.ForeignKey(Message, related_name='history')
     editor = models.ForeignKey(User)
+    diff = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, editable=False)
 
     def __unicode__(self):
