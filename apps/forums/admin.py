@@ -26,7 +26,7 @@ admin.site.register(Message, MessageAdmin)
 
 
 class MessageHistoryAdmin(BaseAdmin):
-    list_display = ('message__topic', 'editor', 'timestamp')
+    list_display = ('message', 'editor', 'timestamp')
     list_filter = ('editor',)
     search_fields = ('message__topic__title', 'message__body')
     date_hierarchy = 'timestamp'
