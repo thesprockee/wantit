@@ -30,7 +30,7 @@ class MessageHistory(models.Model):
     timestamp = models.DateTimeField(default=timezone.now, editable=False)
 
     def __unicode__(self):
-        return unicode("[%s] %s: %s" % (timestamp, editor, message)
+        return unicode("[%s] %s: %s" % (timestamp, editor, message))
 
 
 class TopicTracker(models.Model):
