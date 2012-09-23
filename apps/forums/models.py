@@ -30,6 +30,7 @@ class Message(models.Model):
                 topic_obj.save()
             message = Message(topic=topic_obj, author=author, body=body)
             message.save()
+        return message
             
 
     @property
