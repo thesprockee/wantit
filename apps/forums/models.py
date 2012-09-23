@@ -23,7 +23,7 @@ class Message(models.Model):
         return unicode("%s: %s" % (self.author, self.topic))
 
     @staticmethod
-    class new_message(author, body, topic):
+    def create(author, body, topic):
         with transaction.commit_on_success():
             topic_obj, created = Topic.objects.get_or_create(title=topic)
             if created:
