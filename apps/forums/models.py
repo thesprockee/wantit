@@ -34,7 +34,10 @@ class Message(models.Model):
 
     @property
     def last_change(self):
-        return self.history.latest('timestamp')
+        try:
+            return self.history.latest('timestamp')
+        except MessageHistory.DoesNotExist:
+            return None
 
 
 class MessageHistory(models.Model):
