@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'avatar',
     'django_extensions',
     'apps.campers',
     'apps.forums',
