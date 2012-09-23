@@ -21,3 +21,5 @@ SECRET_KEY = ''
 if DEBUG:
     # Show emails in the console during developement.
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTH_PROFILE_MODULE = 'campers.Camper'
