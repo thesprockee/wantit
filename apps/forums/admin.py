@@ -6,8 +6,8 @@ class BaseAdmin(admin.ModelAdmin):
 
 
 class TopicAdmin(BaseAdmin):
-    list_display = (id, title)
-    list_display_links = (id, title)
+    list_display = ('id', 'title')
+    list_display_links = ('id', 'title')
     search_fields = ('title',)
 
 
@@ -15,8 +15,8 @@ admin.site.register(TopicAdmin, Topic)
 
 
 class MessageAdmin(BaseAdmin):
-    list_display = (author, topic, created)
-    list_display_links = (author, topic)
+    list_display = ('author', 'topic', 'created')
+    list_display_links = ('author', 'topic')
     list_filter = ('author',)
     search_fields = ('topic__title', 'body')
     date_hierarchy = 'created'
