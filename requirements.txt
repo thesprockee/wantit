@@ -1,1 +1,4 @@
 django>=1.4
+django-avator>=1.0.5
+django_extensions>=0.9
+werkzeug>=0.8.3
