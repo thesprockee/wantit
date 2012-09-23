@@ -3,15 +3,30 @@
     <head>
         <title>Bootstrap 101 Template</title>
         <!-- Bootstrap -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="static/css/bootstrap.css" rel="stylesheet">
     </head>
     <body>
-        <div class="navbar">
-        </div>
-        <div class="row">
-            <div class="span3">Menu</div>
-            <div class="span9">Main</div>
+        <div class="container">
+            <div class="navbar navbar-static-top navbar-inverse">
+                <div class="navbar-inner">
+                        <ul class="nav">
+                            <li><a href="/post/">New Post</a></li>
+                            <li><a href="/admin/">Admin</a></li>
+                        </ul>
+                        <ul class="nav pull-right">
+                        {% if user.is_authenticated %}
+                            <li><a href="/camper/">{{ user.username }}</a></li>
+                        {% else %}
+                            <li><a href="/login/">Login</a></li>
+                            <li><a href="/register/">Register</a></li>
+                        {% endif %}
+                        </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span3">Menu</div>
+                <div class="span9">Main</div>
+            </div>
         </div>
         <script src="static/js/jquery-1.8.2.js"></script>
         <script src="static/js/bootstrap.js"></script>
