@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.db import transaction
+from autoslug import AutoSlugField
 
 # Create your models here.
 class Topic(models.Model):
     title = models.CharField(max_length=64)
+    slug = AutoSlugField(populate_from='title')
 
     def __unicode__(self):
         return unicode(self.title)
@@ -18,6 +21,16 @@ class Message(models.Model):
 
     def __unicode__(self):
         return unicode("%s: %s" % (self.author, self.topic))
+
+    @staticmethod
+    class create(author, body, topic):
+        with transaction.commit_on_success():
+            topic_obj, created = Topic.objects.get_or_create(title=topic)
+            if created:
+                topic_obj.save()
+            message = Message(topic=topic_obj, author=author, body=body)
+            message.save()
+            
 
     @property
     def last_change(self):
