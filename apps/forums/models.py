@@ -31,7 +31,6 @@ class Message(models.Model):
             message = Message(topic=topic_obj, author=author, body=body)
             message.save()
         return message
-            
 
     @property
     def last_change(self):
