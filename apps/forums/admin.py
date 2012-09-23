@@ -11,7 +11,7 @@ class TopicAdmin(BaseAdmin):
     search_fields = ('title',)
 
 
-admin.site.register(TopicAdmin, Topic)
+admin.site.register(Topic, TopicAdmin)
 
 
 class MessageAdmin(BaseAdmin):
@@ -22,7 +22,7 @@ class MessageAdmin(BaseAdmin):
     date_hierarchy = 'created'
 
 
-admin.site.register(MessageAdmin, Message)
+admin.site.register(Message, MessageAdmin)
 
 
 class MessageHistoryAdmin(BaseAdmin):
@@ -32,7 +32,7 @@ class MessageHistoryAdmin(BaseAdmin):
     date_hierarchy = 'timestamp'
 
 
-admin.site.register(MessageHistoryAdmin, MessageHistory)
+admin.site.register(MessageHistory, MessageHistoryAdmin)
 
 
 class TopicTrackerAdmin(BaseAdmin):
@@ -42,4 +42,4 @@ class TopicTrackerAdmin(BaseAdmin):
     date_hierarchy = 'last_read'
 
 
-admin.site.register(TopicTrackerAdmin, TopicTracker)
+admin.site.register(TopicTracker, TopicTrackerAdmin)
