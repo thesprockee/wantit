@@ -9,6 +9,9 @@ from difflib import unified_diff
 class Topic(models.Model):
     title = models.CharField(max_length=64)
     slug = AutoSlugField(populate_from='title')
+    locked = models.BooleanField(default=False)
+    hidden = models.BooleanField(default=False)
+    sticky = models.BooleanField(default=False)
 
     def __unicode__(self):
         return unicode(self.title)
@@ -24,9 +27,10 @@ class Message(models.Model):
         return unicode("%s: %s" % (self.author, self.topic))
 
     @staticmethod
-    def create(author, body, topic):
+    def create(author, body, topic, sticky=False):
         with transaction.commit_on_success():
-            topic_obj, created = Topic.objects.get_or_create(title=topic)
+            topic_obj, created = Topic.objects.get_or_create(title=topic,
+                    defaults={'sticky': sticky})
             if created:
                 topic_obj.save()
             message = Message(topic=topic_obj, author=author, body=body)
