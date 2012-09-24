@@ -3,11 +3,11 @@
     <head>
         <title>Bootstrap 101 Template</title>
         <!-- Bootstrap -->
-        <link href="static/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
     </head>
     <body>
         <div class="container">
-            <div class="navbar navbar-static-top navbar-inverse">
+            <div class="navbar navbar-/static-top navbar-inverse">
                 <div class="navbar-inner">
                         <ul class="nav">
                             <li><a href="/post/">New Post</a></li>
@@ -18,17 +18,21 @@
                             <li><a href="/camper/">{{ user.username }}</a></li>
                         {% else %}
                             <li><a href="/login/">Login</a></li>
-                            <li><a href="/register/">Register</a></li>
+                            <li><a href="{% url register %}">Register</a></li>
                         {% endif %}
                         </ul>
                 </div>
             </div>
             <div class="row">
-                <div class="span3">Menu</div>
-                <div class="span9">Main</div>
+                <div class="span3">
+                    {% block linkbar %}{% endblock %}
+                </div>
+                <div class="span9">
+                    {% block main %}{% endblock %}
+                </div>
             </div>
         </div>
-        <script src="static/js/jquery-1.8.2.js"></script>
-        <script src="static/js/bootstrap.js"></script>
+        <script src="/static/js/jquery-1.8.2.js"></script>
+        <script src="/static/js/bootstrap.js"></script>
     </body>
 </html>
