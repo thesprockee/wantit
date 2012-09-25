@@ -4,10 +4,19 @@
         <title>Bootstrap 101 Template</title>
         <!-- Bootstrap -->
         <link href="/static/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/wantit.css" rel="stylesheet">
     </head>
     <body>
         <div class="container">
-            <div class="navbar navbar-/static-top navbar-inverse">
+            <header class="jumbotron subhead" id="overview">
+              <div class="container">
+                <h1><a href="/">Want It!</a></h1>
+                <p class="lead">This is why we can't have nice things!</p>
+              </div>
+            </header>
+        </div>
+        <div class="container">
+            <div class="navbar navbar-inverse">
                 <div class="navbar-inner">
                         <ul class="nav">
                             <li><a href="/post/">New Post</a></li>
@@ -15,14 +24,28 @@
                         </ul>
                         <ul class="nav pull-right">
                         {% if user.is_authenticated %}
-                            <li><a href="/camper/">{{ user.username }}</a></li>
-                        {% else %}
-                            <li><a href="/login/">Login</a></li>
-                            <li><a href="{% url register %}">Register</a></li>
-                        {% endif %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {{ user.username }} <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="{% url logout %}">Logout</a></li>
+                                </ul>
+                            </li>
                         </ul>
+                        {% else %}
+                            <li><a href="{% url register %}">Register</a></li>
+                        </ul>
+                        <form class="navbar-form pull-right" method="post" action="{% url login %}?next={{ request.path }}"> {% csrf_token %}
+                            <input type="text" class="input-small" name="username" placeholder="user">
+                            <input type="password" class="input-small" name="password" placeholder="password">
+                            <button type="submit" class="btn">Sign In</button>
+                        </form>
+                        {% endif %}
                 </div>
             </div>
+
             <div class="row">
                 <div class="span3">
                     {% block linkbar %}{% endblock %}
