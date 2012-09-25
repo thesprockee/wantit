@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block main %}
+<form class="form-horizontal" action="{% url login %}" method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="control-group fieldWrapper">
+        {{ form.username.errors }}
+        <label class="control-label" for="id_username">{{ form.username.label }} </label>
+        <div class="controls">
+            {{ form.username }}
+        </div>
+    </div>
+    <div class="control-group fieldWrapper">
+        {{ form.password.errors }}
+        <label class="control-label" for="id_password2">{{ form.password.label }} </label>
+        <div class="controls">
+            {{ form.password }}
+        </div>
+        <button type="submit" class="btn">Submit</button>
+    </div>
+</form>
+{% endblock %}

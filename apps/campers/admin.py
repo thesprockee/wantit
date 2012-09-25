@@ -23,6 +23,15 @@ admin.site.register(User, UserAdmin)
 class AccountRequestAdmin(BaseAdmin):
     list_display = ('username', 'email', 'timestamp')
     list_display_links = ('username', 'email')
+    actions = ['approve', 'deny']
+
+    def approve(self, request, queryset):
+        for request in queryset:
+            request.approve()
+
+    def deny(self, request, queryset):
+        for request in queryset:
+            request.deny()
 
 
 admin.site.register(AccountRequest, AccountRequestAdmin)
