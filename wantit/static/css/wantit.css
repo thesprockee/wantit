@@ -1,3 +1,17 @@
 .jumbotron {
-    background: blue;
+    background-image: linear-gradient(bottom, rgb(156,0,21) 32%, rgb(66,3,3) 66%, rgb(0,1,8) 83%);
+    background-image: -o-linear-gradient(bottom, rgb(156,0,21) 32%, rgb(66,3,3) 66%, rgb(0,1,8) 83%);
+    background-image: -moz-linear-gradient(bottom, rgb(156,0,21) 32%, rgb(66,3,3) 66%, rgb(0,1,8) 83%);
+    background-image: -webkit-linear-gradient(bottom, rgb(156,0,21) 32%, rgb(66,3,3) 66%, rgb(0,1,8) 83%);
+    background-image: -ms-linear-gradient(bottom, rgb(156,0,21) 32%, rgb(66,3,3) 66%, rgb(0,1,8) 83%);
+
+    background-image: -webkit-gradient(
+            linear,
+            right bottom,
+            right top,
+            color-stop(0.32, rgb(156,0,21)),
+            color-stop(0.66, rgb(66,3,3)),
+            color-stop(0.83, rgb(0,1,8))
+    );
+
 }
