@@ -16,6 +16,14 @@ class Topic(models.Model):
     def __unicode__(self):
         return unicode(self.title)
 
+    def get_unread_messages(self, user):
+        tracker = TopicTracker.objects.get(topic=self, user=user)
+        return Message.objects.filter(topic=self,
+                id__gt=tracker.last_read.id)
+
+    def unread_message_count(self, user):
+        return self.get_unread_messages(user).count()
+
 
 class Message(models.Model):
     topic = models.ForeignKey(Topic)
@@ -53,6 +61,13 @@ class Message(models.Model):
             history.save()
             self.body = new_body
             self.save()
+
+    def has_read(self, user):
+        """
+        Returns True if the given user has already read this message.
+        """
+        tracker = TopicTracker.objects.get(topic=self.topic, user=user)
+        return tracker.last_read.id >= self.id
 
 
 class MessageHistory(models.Model):
