@@ -13,7 +13,7 @@
         </thead>
         {% for camper in object_list %}
         <tr>
-            <td>{% avatar camper 50 %} {{ camper.username }}</td>
+            <td>{% avatar camper 25 %} {{ camper.username }}</td>
             <td>{{ camper.get_profile.nickname }}</td>
         </tr>
         {% endfor %}
